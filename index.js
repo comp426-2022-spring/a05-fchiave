@@ -32,3 +32,6 @@ const app = express()
 const server = app.listen(port, () => {
     console.log('App listening on port %PORT%'.replace('%PORT%',port))
 });
+
+// Serve static HTML files
+app.use(express.static('./public'));
