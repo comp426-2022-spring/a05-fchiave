@@ -22,9 +22,13 @@ if (args.help == true) {
     process.exit(0);
 }
 
-const port = args.port || process.env.PORT || 5555
+const port = args.port || process.env.PORT || 3000
 
 // express.js
 const express = require('express')
 const app = express()
 
+// start server
+const server = app.listen(port, () => {
+    console.log('App listening on port %PORT%'.replace('%PORT%',port))
+});
