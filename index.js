@@ -27,6 +27,9 @@ const port = args.port || process.env.PORT || 3000
 // express.js
 const express = require('express')
 const app = express()
+// json compatibility for express
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
 // start server
 const server = app.listen(port, () => {
