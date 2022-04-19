@@ -5,7 +5,7 @@ const minimist = require('minimist')
 const args = minimist(process.argv.slice(2))
 
 // Require database.js
-const db = require('./services/database.js');
+const db = require('./src/services/database.js');
 // Require morgan
 const morgan = require("morgan")
 // Require fs
@@ -87,6 +87,69 @@ if (args.debug) {
     }
 }
 
+//endpoints
+app.get('/app/', (req, res) => {
+    // Respond with status 200
+        res.statusCode = 200;
+    // Respond with status message "OK"
+        res.statusMessage = 'OK';
+        res.writeHead( res.statusCode, { 'Content-Type' : 'text/plain' });
+        res.end(res.statusCode+ ' ' +res.statusMessage)
+    });
+
+app.get('/app/flip/', (req, res) => {
+    // HTTP responses, using mozilla status codes
+    res.statusCode = 200;
+    res.statusMessage = 'OK'
+    res.writeHead( res.statusCode, { 'Content-Type' : 'text/plain' });
+
+    // String cleanup to get last part of path easily
+    const path = req.path.substring(0, req.path.length-1)
+    // Call flip module and set end with result
+    res.status(200).json("{\"" + path.substring(path.lastIndexOf('/') + 1) + "\":\"" + coinFlip() + "\"}")
+})
+
+app.get('/app/flips/:number', (req, res) => {
+    // param validation - check if integer
+    if (!Number.isInteger(parseInt(req.body.number))) {
+        // HTTP responses, using mozilla status codes
+        res.statusCode = 400
+        res.statusMessage = 'The server cannot process the request due to client error'
+        res.writeHead( res.statusCode, { 'Content-Type' : 'text/plain' });
+        res.end()
+        return
+    }
+    // HTTP responses, using mozilla status codes
+    res.statusCode = 200;
+    res.statusMessage = 'OK'
+    res.writeHead( res.statusCode, { 'Content-Type' : 'text/plain' });
+
+	const flips = coinFlips(req.body.number)
+    const sumFlips = countFlips(flips)
+    res.status(200).json({"raw":flips,"summary":count})
+    //res.end("{\"raw\":[" + flips + "],\"summary\":{\"tails\":" + sumFlips.tails + ",\"heads\":" + sumFlips.heads + "}}")
+});
+
+app.get('/app/flip/call/:call', (req, res) => {
+    // param validation
+    if (req.body.call !== 'tails' && req.body.call !== 'heads') {
+        // HTTP responses, using mozilla status codes
+        res.statusCode = 400
+        res.statusMessage = 'The server cannot process the request due to client error'
+        res.writeHead( res.statusCode, { 'Content-Type' : 'text/plain' });
+        res.end()
+        return
+    }
+
+    // HTTP responses, using mozilla status codes
+    res.statusCode = 200;
+    res.statusMessage = 'OK'
+    res.writeHead( res.statusCode, { 'Content-Type' : 'text/plain' });
+
+	const flip = flipACoin(req.body.call)
+    res.status(200).json(flip)
+    //res.end("{\"call\":\"" + flip.call + "\",\"flip\":\"" + flip.flip + "\",\"result\":\"" + flip.result + "\"}")
+});
 
 // Default response for any other request
 app.use(function(req, res){

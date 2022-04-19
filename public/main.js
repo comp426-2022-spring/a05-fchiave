@@ -4,7 +4,7 @@
 
 // Button coin flip element
 function flipCoin() {
-    const response = fetch('http://localhost:3000/app/flip/')
+    const response = fetch('http://localhost:5000/app/flip/')
         .then(function (response) {
             return response.json();
         })
