@@ -5,7 +5,7 @@ const minimist = require('minimist')
 const args = minimist(process.argv.slice(2))
 
 // Require database.js
-const db = require('./database.js');
+const db = require('./services/database.js');
 // Require morgan
 const morgan = require("morgan")
 // Require fs
