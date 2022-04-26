@@ -114,19 +114,20 @@ Keep-Alive: timeout=5
 ```
 
 ### /app/flips/ (POST)
- * Flips amount of coins specified in form on multi div, returns results of flips
+ * Flips amount of coins specified in form on multi div, returns:
+  * raw - results of flips 
+  * summary - condensed summary of flips
 #### Request cURL
 
 ```
-curl http://localhost:5000/app/flips/
+curl http://localhost:5000/app/flips/3
 ```
 
 #### Response body
 
 ```
-raw: (33) ['"tails"', '"heads"', '"heads"', '"heads"', '"heads"', '"heads"', '"heads"', '"heads"', '"heads"', '"heads"', '"heads"', '"tails"', '"tails"', '"tails"', '"heads"', '"heads"', '"tails"', '"tails"', '"tails"', '"heads"', '"heads"', '"heads"', '"heads"', '"tails"', '"tails"', '"tails"', '"heads"', '"tails"', '"tails"', '"heads"', '"tails"', '"tails"', '"tails"']
-summary: {tails: 15, heads: 18}
-[[Prototype]]: Object
+raw: (3) ['"heads"', '"tails"', '"heads"']
+summary: {tails: 1, heads: 2}
 ```
 
 #### Response headers
