@@ -82,7 +82,7 @@ if (args.debug) {
         res.status(200).json(stmt)
     });
 
-    app.get('/app/error', (req, res) => {
+    app.get('/app/log/error', (req, res) => {
         throw new Error('Error test successful.') // Express will catch this on its own.
     });
 
