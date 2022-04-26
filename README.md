@@ -163,7 +163,9 @@ Keep-Alive: timeout=5
 ```
 
 ### /app/flip/coins/ (POST)
-
+* Flips provided number of coins and return results in two arrays
+* Returns "raw" that lists all flips
+* Returns "summary" that condenses all flips into numerical values of each flip
 #### Request cURL
 
 ```
