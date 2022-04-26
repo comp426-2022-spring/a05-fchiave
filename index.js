@@ -1,4 +1,5 @@
 // Place your server entry point code here
+
 // Import coin methods
 const fl = require("./src/routes/someroutes")
 // minimist for arguments
@@ -38,6 +39,10 @@ const app = express()
 // json compatibility for express
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+// Add cors dependency
+const cors = require('cors')
+// Set up cors middleware on all endpoints
+app.use(cors())
 
 
 
@@ -107,10 +112,10 @@ app.get('/app/flip/', (req, res) => {
     // String cleanup to get last part of path easily
     const path = req.path.substring(0, req.path.length-1)
     // Call flip module and set end with result
-
+    console.log(req.body)
     res.end("{\"" + path.substring(path.lastIndexOf('/') + 1) + "\":\"" + fl.coinFlip() + "\"}")})
 
-app.get('/app/flips/:number', (req, res) => {
+app.post('/app/flips/', (req, res) => {
     // param validation - check if integer
     if (!Number.isInteger(parseInt(req.body.number))) {
         // HTTP responses, using mozilla status codes
@@ -130,10 +135,11 @@ app.get('/app/flips/:number', (req, res) => {
     res.end("{\"raw\":[" + flips + "],\"summary\":{\"tails\":" + sumFlips.tails + ",\"heads\":" + sumFlips.heads + "}}")
 });
 
-app.get('/app/flip/call/:call', (req, res) => {
+app.post('/app/flip/call/', (req, res) => {
     // param validation
-    if (req.body.call !== 'tails' && req.body.call !== 'heads') {
+    if (req.body.call !== "tails" && req.body.call !== "heads") {
         // HTTP responses, using mozilla status codes
+        console.log(req)
         res.statusCode = 400
         res.statusMessage = 'The server cannot process the request due to client error'
         res.writeHead( res.statusCode, { 'Content-Type' : 'text/plain' });
@@ -153,6 +159,7 @@ app.get('/app/flip/call/:call', (req, res) => {
 // New endpoint
 // Flip a bunch of coins with one body variable (number)
 app.post('/app/flip/coins/', (req, res, next) => {
+    console.log(req.body)
     const flips = fl.coinFlips(req.body.number)
     const count = fl.countFlips(flips)
     res.status(200).json({"raw":flips,"summary":count})

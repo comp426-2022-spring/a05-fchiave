@@ -45,7 +45,7 @@ function guessNav() {
 const flipOne = document.getElementById("flipOne")
 flipOne.addEventListener("click", flipCoin)
 function flipCoin() {
-    const response = fetch('http://localhost:5000/app/flip/')
+    const response = fetch('http://localhost:5000/app/flip/', {mode: 'cors'})
         .then(function (response) {
             return response.json();
         })
@@ -110,4 +110,62 @@ async function sendFlips({ url, formData }) {
 
 
 // Guess a flip by clicking either heads or tails button
+const guessHeads = document.getElementById("guessHeads")
+flipOne.addEventListener("click", guess)
+const guessTails = document.getElementById("guessTails")
+flipOne.addEventListener("click", guess)
 
+async function guess(event) {
+    event.preventDefault();
+    
+    const url = "http://localhost:5000/app/flip/call/"
+
+    const formEvent = event.currentTarget
+
+    try {
+        const formData = new FormData(formEvent);
+        const resu = await sendGuess({ url, formData });
+
+        console.log(resu);
+        document.getElementById("heads").innerHTML = "Heads (Blue): "+flips.summary.heads;
+        document.getElementById("tails").innerHTML = "Tails (Red): "+flips.summary.tails;
+        let piChart = document.getElementById("pi")
+        piChart.style.display = "block";
+        let headPerc = (flips.summary.heads / (flips.summary.heads + flips.summary.tails))*100;
+        let tailPerc = 100-headPerc;
+        piChart.style.backgroundImage = "conic-gradient(blue "+headPerc+"%, red "+tailPerc+"%)"
+    } catch (error) {
+        console.log(error);
+    }
+}
+// Create a data sender
+async function sendGuess({ url, formData }) {
+    const plainFormData = Object.fromEntries(formData.entries());
+    const formDataJson = JSON.stringify(plainFormData);
+    console.log(formDataJson);
+
+    const options = {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+            Accept: "application/json"
+        },
+        body: formDataJson
+    };
+
+    const response = await fetch(url, options);
+    return response.json()
+}
+/*
+function guess(g) {
+    const response = fetch('http://localhost:5000/app/flip/call/{call}'+g)
+        .then(function (response) {
+            return response.json();
+        })
+        .then(function (result) {
+            console.log(result);
+            document.getElementById("result").innerHTML = result.flip;
+            document.getElementById("quarter").setAttribute("src", "./assets/img/"+result.flip+".png");
+            
+        })
+} */

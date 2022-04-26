@@ -83,6 +83,7 @@
    */
   
   function flipACoin(call) {
+    console.log("call: " + call)
     let flip = coinFlip();
     return {call: call, flip: flip, result: flip == call ? "win" : "lose" }
   }
