@@ -5,8 +5,8 @@
 
 // Focus div based on nav button click
 
-// Flip one coin and show coin image to match result when button clicked
 
+// Flip one coin and show coin image to match result when button clicked
 // Button coin flip element
 const flipOne = document.getElementById("flipOne")
 flipOne.addEventListener("click", flipCoin)
