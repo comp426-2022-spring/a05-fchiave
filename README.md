@@ -94,24 +94,8 @@ Keep-Alive: timeout=5
 ```
 
 ### /app/flips/:number/ (GET)
- * Deprecated as it interfered with post and json objects, see /app/flips/ (POST)
-#### Request cURL
+ * Deprecated as endpoint interfered with post and json objects, see /app/flips/ (POST)
 
-```
-
-```
-
-#### Response body
-
-```
-
-```
-
-#### Response headers
-
-```
-
-```
 
 ### /app/flips/ (POST)
  * Flips amount of coins specified in form on multi div, returns:
@@ -141,48 +125,18 @@ Date: Tue, 26 Apr 2022 21:46:21 GMT
 Connection: keep-alive
 Keep-Alive: timeout=5
 ```
-### /app/flip/coin/ (GET)
 
-#### Request cURL
-
-```
-
-```
-
-#### Response body
-
-```
-
-```
-
-#### Response headers
-
-```
-
-```
 
 ### /app/flip/call/:guess/ (GET)
+ * Deprecated as endpoint interfered with post and json objects, see /app/flip/call/ (POST)
 
-#### Request cURL
-
-```
-
-```
-
-#### Response body
-
-```
-
-```
-
-#### Response headers
-
-```
-
-```
 
 ### /app/flip/call/ (POST)
-
+ * Sends guess of coin flip to server
+ * Returns:
+    * "call" - initial guess
+    * "flip" - actual coin flip result
+    * "result" - win or loss dependent on call and flip matching
 #### Request cURL
 
 ```
