@@ -42,8 +42,13 @@ async function flipCoins(event) {
         const flips = await sendFlips({ url, formData });
 
         console.log(flips);
-        document.getElementById("heads").innerHTML = "Heads: "+flips.summary.heads;
-        document.getElementById("tails").innerHTML = "Tails: "+flips.summary.tails;
+        document.getElementById("heads").innerHTML = "Heads (Blue): "+flips.summary.heads;
+        document.getElementById("tails").innerHTML = "Tails (Red): "+flips.summary.tails;
+        let piChart = document.getElementById("pi")
+        piChart.style.display = "block";
+        let headPerc = (flips.summary.heads / (flips.summary.heads + flips.summary.tails))*100;
+        let tailPerc = 100-headPerc;
+        piChart.style.backgroundImage = "conic-gradient(blue "+headPerc+"%, red "+tailPerc+"%)"
     } catch (error) {
         console.log(error);
     }

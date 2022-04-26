@@ -13,3 +13,11 @@ img.bigcoin {
 img.smallcoin {
   width: 50px;
 }
+
+.pie {
+  display: none;
+  width: 50px;
+  height: 50px;
+  background-image: conic-gradient(orange 64%, blue 17%, black);
+  border-radius: 50%
+}
