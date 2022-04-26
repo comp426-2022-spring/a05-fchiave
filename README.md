@@ -120,7 +120,7 @@ Keep-Alive: timeout=5
 #### Request cURL
 
 ```
-curl http://localhost:5000/app/flips/3
+curl -X POST -H 'Content-Type: application/json' -d '{"number":"3"}' http://localhost:5000/app/flips/
 ```
 
 #### Response body
