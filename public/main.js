@@ -31,7 +31,7 @@ function multiNav() {
     document.getElementById("guess").classList.add("hidden");
 }
 
-const guessClick = document.getElementById("guessNav")
+const guessClick = document.getElementById("guessnav")
 guessClick.addEventListener("click", guessNav)
 function guessNav() {
     document.getElementById("home").classList.add("hidden");
