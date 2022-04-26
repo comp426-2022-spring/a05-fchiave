@@ -1,7 +1,7 @@
 // Add cors dependency
-const cors = require('cors')
+//const cors = require('cors')
 // Set up cors middleware on all endpoints
-app.use(cors())
+//app.use(cors())
 
 // Focus div based on nav button click
 

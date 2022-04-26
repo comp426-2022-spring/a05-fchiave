@@ -1,5 +1,6 @@
 // Place your server entry point code here
-
+// Import coin methods
+const fl = require("./src/routes/someroutes")
 // minimist for arguments
 const minimist = require('minimist')
 const args = minimist(process.argv.slice(2))
@@ -106,8 +107,8 @@ app.get('/app/flip/', (req, res) => {
     // String cleanup to get last part of path easily
     const path = req.path.substring(0, req.path.length-1)
     // Call flip module and set end with result
-    res.status(200).json("{\"" + path.substring(path.lastIndexOf('/') + 1) + "\":\"" + coinFlip() + "\"}")
-})
+
+    res.end("{\"" + path.substring(path.lastIndexOf('/') + 1) + "\":\"" + fl.coinFlip() + "\"}")})
 
 app.get('/app/flips/:number', (req, res) => {
     // param validation - check if integer
@@ -124,10 +125,9 @@ app.get('/app/flips/:number', (req, res) => {
     res.statusMessage = 'OK'
     res.writeHead( res.statusCode, { 'Content-Type' : 'text/plain' });
 
-	const flips = coinFlips(req.body.number)
-    const sumFlips = countFlips(flips)
-    res.status(200).json({"raw":flips,"summary":count})
-    //res.end("{\"raw\":[" + flips + "],\"summary\":{\"tails\":" + sumFlips.tails + ",\"heads\":" + sumFlips.heads + "}}")
+	const flips = fl.coinFlips(req.body.number)
+    const sumFlips = fl.countFlips(flips)
+    res.end("{\"raw\":[" + flips + "],\"summary\":{\"tails\":" + sumFlips.tails + ",\"heads\":" + sumFlips.heads + "}}")
 });
 
 app.get('/app/flip/call/:call', (req, res) => {
@@ -146,9 +146,8 @@ app.get('/app/flip/call/:call', (req, res) => {
     res.statusMessage = 'OK'
     res.writeHead( res.statusCode, { 'Content-Type' : 'text/plain' });
 
-	const flip = flipACoin(req.body.call)
-    res.status(200).json(flip)
-    //res.end("{\"call\":\"" + flip.call + "\",\"flip\":\"" + flip.flip + "\",\"result\":\"" + flip.result + "\"}")
+	const flip = fl.flipACoin(req.body.call)
+    res.end("{\"call\":\"" + flip.call + "\",\"flip\":\"" + flip.flip + "\",\"result\":\"" + flip.result + "\"}")
 });
 
 // Default response for any other request
