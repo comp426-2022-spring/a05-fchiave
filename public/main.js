@@ -1,8 +1,15 @@
+// Add cors dependency
+const cors = require('cors')
+// Set up cors middleware on all endpoints
+app.use(cors())
+
 // Focus div based on nav button click
 
 // Flip one coin and show coin image to match result when button clicked
 
 // Button coin flip element
+const flipOne = document.getElementById("flipOne")
+flipOne.addEventListener("click", flipCoin)
 function flipCoin() {
     const response = fetch('http://localhost:5000/app/flip/')
         .then(function (response) {
