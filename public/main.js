@@ -15,13 +15,30 @@ function homeNav() {
 
 const oneClick = document.getElementById("singlenav")
 oneClick.addEventListener("click", oneNav)
+function oneNav() {
+    document.getElementById("home").classList.add("hidden");
+    document.getElementById("single").classList.remove("hidden");
+    document.getElementById("multi").classList.add("hidden");
+    document.getElementById("guess").classList.add("hidden");
+}
 
 const multiClick = document.getElementById("multinav")
 multiClick.addEventListener("click", multiNav)
+function multiNav() {
+    document.getElementById("home").classList.add("hidden");
+    document.getElementById("single").classList.add("hidden");
+    document.getElementById("multi").classList.remove("hidden");
+    document.getElementById("guess").classList.add("hidden");
+}
 
 const guessClick = document.getElementById("guessNav")
 guessClick.addEventListener("click", guessNav)
-
+function guessNav() {
+    document.getElementById("home").classList.add("hidden");
+    document.getElementById("single").classList.add("hidden");
+    document.getElementById("multi").classList.add("hidden");
+    document.getElementById("guess").classList.remove("hidden");
+}
 
 // Flip one coin and show coin image to match result when button clicked
 // Button coin flip element
