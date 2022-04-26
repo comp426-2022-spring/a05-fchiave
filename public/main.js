@@ -70,6 +70,7 @@ async function flipCoins(event) {
     const url = "http://localhost:5000/app/flip/coins/"
 
     const formEvent = event.currentTarget
+    console.log(event.currentTarget)
 
     try {
         const formData = new FormData(formEvent);
@@ -111,37 +112,23 @@ async function sendFlips({ url, formData }) {
 
 // Guess a flip by clicking either heads or tails button
 const guessHeads = document.getElementById("guessHeads")
-flipOne.addEventListener("click", guess)
-const guessTails = document.getElementById("guessTails")
-flipOne.addEventListener("click", guess)
-
-async function guess(event) {
-    event.preventDefault();
-    
-    const url = "http://localhost:5000/app/flip/call/"
-
-    const formEvent = event.currentTarget
+guessHeads.addEventListener("click", guessH)
+async function guessH() {
+    const url = 'http://localhost:5000/app/flip/call/'
 
     try {
-        const formData = new FormData(formEvent);
-        const resu = await sendGuess({ url, formData });
+        const guess = await sendGuess({ url, formData: "{\"call\":\"heads\"}" });
 
-        console.log(resu);
+        console.log(guess);
         document.getElementById("heads").innerHTML = "Heads (Blue): "+flips.summary.heads;
         document.getElementById("tails").innerHTML = "Tails (Red): "+flips.summary.tails;
-        let piChart = document.getElementById("pi")
-        piChart.style.display = "block";
-        let headPerc = (flips.summary.heads / (flips.summary.heads + flips.summary.tails))*100;
-        let tailPerc = 100-headPerc;
-        piChart.style.backgroundImage = "conic-gradient(blue "+headPerc+"%, red "+tailPerc+"%)"
     } catch (error) {
         console.log(error);
     }
 }
 // Create a data sender
 async function sendGuess({ url, formData }) {
-    const plainFormData = Object.fromEntries(formData.entries());
-    const formDataJson = JSON.stringify(plainFormData);
+    const formDataJson = formData;
     console.log(formDataJson);
 
     const options = {
@@ -157,8 +144,22 @@ async function sendGuess({ url, formData }) {
     return response.json()
 }
 /*
-function guess(g) {
-    const response = fetch('http://localhost:5000/app/flip/call/{call}'+g)
+function guessH() {
+    const response = fetch('http://localhost:5000/app/flip/call/heads')
+        .then(function (response) {
+            return response.json();
+        })
+        .then(function (result) {
+            console.log(result);
+            document.getElementById("result").innerHTML = result.flip;
+            document.getElementById("quarter").setAttribute("src", "./assets/img/"+result.flip+".png");
+            
+        })
+}
+const guessTails = document.getElementById("guessTails")
+guessTails.addEventListener("click", guessT)
+function guessT() {
+    const response = fetch('http://localhost:5000/app/flip/call/tails')
         .then(function (response) {
             return response.json();
         })
@@ -169,3 +170,4 @@ function guess(g) {
             
         })
 } */
+
