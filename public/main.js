@@ -70,13 +70,11 @@ async function flipCoins(event) {
     const url = "http://localhost:5000/app/flip/coins/"
 
     const formEvent = event.currentTarget
-    console.log(event.currentTarget)
 
     try {
         const formData = new FormData(formEvent);
         const flips = await sendFlips({ url, formData });
 
-        console.log(flips);
         document.getElementById("heads").innerHTML = "Heads (Blue): "+flips.summary.heads;
         document.getElementById("tails").innerHTML = "Tails (Red): "+flips.summary.tails;
         let piChart = document.getElementById("pi")
@@ -92,7 +90,6 @@ async function flipCoins(event) {
 async function sendFlips({ url, formData }) {
     const plainFormData = Object.fromEntries(formData.entries());
     const formDataJson = JSON.stringify(plainFormData);
-    console.log(formDataJson);
 
     const options = {
         method: "POST",
@@ -120,16 +117,37 @@ async function guessH() {
         const guess = await sendGuess({ url, formData: "{\"call\":\"heads\"}" });
 
         console.log(guess);
-        document.getElementById("heads").innerHTML = "Heads (Blue): "+flips.summary.heads;
-        document.getElementById("tails").innerHTML = "Tails (Red): "+flips.summary.tails;
+        document.getElementById("yourGuess").innerHTML = guess.call;
+        document.getElementById("guessActual").innerHTML = guess.flip;
+        document.getElementById("victory").innerHTML = guess.result+"!";
+        document.getElementById("quarterGuess").setAttribute("src", "./assets/img/"+guess.call+".png");
+        document.getElementById("quarterActual").setAttribute("src", "./assets/img/"+guess.flip+".png");
     } catch (error) {
         console.log(error);
     }
 }
+const guessTails = document.getElementById("guessTails")
+guessTails.addEventListener("click", guessT)
+async function guessT() {
+    const url = 'http://localhost:5000/app/flip/call/'
+
+    try {
+        const guess = await sendGuess({ url, formData: "{\"call\":\"tails\"}" });
+
+        console.log(guess);
+        document.getElementById("yourGuess").innerHTML = guess.call;
+        document.getElementById("guessActual").innerHTML = guess.flip;
+        document.getElementById("victory").innerHTML = guess.result+"!";
+        document.getElementById("quarterGuess").setAttribute("src", "./assets/img/"+guess.call+".png");
+        document.getElementById("quarterActual").setAttribute("src", "./assets/img/"+guess.flip+".png");
+    } catch (error) {
+        console.log(error);
+    }
+}
+
 // Create a data sender
 async function sendGuess({ url, formData }) {
     const formDataJson = formData;
-    console.log(formDataJson);
 
     const options = {
         method: "POST",
@@ -156,8 +174,7 @@ function guessH() {
             
         })
 }
-const guessTails = document.getElementById("guessTails")
-guessTails.addEventListener("click", guessT)
+
 function guessT() {
     const response = fetch('http://localhost:5000/app/flip/call/tails')
         .then(function (response) {

@@ -112,7 +112,6 @@ app.get('/app/flip/', (req, res) => {
     // String cleanup to get last part of path easily
     const path = req.path.substring(0, req.path.length-1)
     // Call flip module and set end with result
-    console.log(req.body)
     res.end("{\"" + path.substring(path.lastIndexOf('/') + 1) + "\":\"" + fl.coinFlip() + "\"}")})
 
 app.post('/app/flips/', (req, res) => {
@@ -139,14 +138,12 @@ app.post('/app/flip/call/', (req, res) => {
     // param validation
     if (req.body.call !== "tails" && req.body.call !== "heads") {
         // HTTP responses, using mozilla status codes
-        console.log(req)
         res.statusCode = 400
         res.statusMessage = 'The server cannot process the request due to client error'
         res.writeHead( res.statusCode, { 'Content-Type' : 'text/plain' });
         res.end()
         return
     }
-    console.log(req.body)
     // HTTP responses, using mozilla status codes
     res.statusCode = 200;
     res.statusMessage = 'OK'
