@@ -18,7 +18,7 @@ function flipCoin() {
         .then(function (result) {
             console.log(result);
             document.getElementById("result").innerHTML = result.flip;
-            document.getElementById("quarter").setAttribute("src", result.flip+".jpg");
+            document.getElementById("quarter").setAttribute("src", "./assets/img/"+result.flip+".png");
             
         })
 }
