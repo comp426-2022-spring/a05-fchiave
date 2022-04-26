@@ -4,6 +4,23 @@
 //app.use(cors())
 
 // Focus div based on nav button click
+const homeClick = document.getElementById("homenav")
+homeClick.addEventListener("click", homeNav)
+function homeNav() {
+    document.getElementById("home").classList.remove("hidden");
+    document.getElementById("single").classList.add("hidden");
+    document.getElementById("multi").classList.add("hidden");
+    document.getElementById("guess").classList.add("hidden");
+}
+
+const oneClick = document.getElementById("singlenav")
+oneClick.addEventListener("click", oneNav)
+
+const multiClick = document.getElementById("multinav")
+multiClick.addEventListener("click", multiNav)
+
+const guessClick = document.getElementById("guessNav")
+guessClick.addEventListener("click", guessNav)
 
 
 // Flip one coin and show coin image to match result when button clicked
