@@ -220,24 +220,41 @@ Keep-Alive: timeout=5
 ```
 
 ### /app/log/error/ (GET)
-
-_Not yet implemented_
+ * Returns an error log of server
 
 #### Request cURL
 
 ```
-
+curl http://localhost:5000/app/log/error
 ```
 
 #### Response body
 
 ```
-
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Error</title>
+</head>
+<body>
+<pre>Error: Error test successful.<br> &nbsp; &nbsp;at /home/fchiave/github-classroom/comp426-2022-spring/a05-fchiave/index.js:86:15<br> &nbsp; &nbsp;at Layer.handle [as handle_request] (/home/fchiave/github-classroom/comp426-2022-spring/a05-fchiave/node_modules/express/lib/router/layer.js:95:5)<br> &nbsp; &nbsp;at next (/home/fchiave/github-classroom/comp426-2022-spring/a05-fchiave/node_modules/express/lib/router/route.js:137:13)<br> &nbsp; &nbsp;at Route.dispatch (/home/fchiave/github-classroom/comp426-2022-spring/a05-fchiave/node_modules/express/lib/router/route.js:112:3)<br> &nbsp; &nbsp;at Layer.handle [as handle_request] (/home/fchiave/github-classroom/comp426-2022-spring/a05-fchiave/node_modules/express/lib/router/layer.js:95:5)<br> &nbsp; &nbsp;at /home/fchiave/github-classroom/comp426-2022-spring/a05-fchiave/node_modules/express/lib/router/index.js:281:22<br> &nbsp; &nbsp;at Function.process_params (/home/fchiave/github-classroom/comp426-2022-spring/a05-fchiave/node_modules/express/lib/router/index.js:341:12)<br> &nbsp; &nbsp;at next (/home/fchiave/github-classroom/comp426-2022-spring/a05-fchiave/node_modules/express/lib/router/index.js:275:10)<br> &nbsp; &nbsp;at /home/fchiave/github-classroom/comp426-2022-spring/a05-fchiave/index.js:75:5<br> &nbsp; &nbsp;at Layer.handle [as handle_request] (/home/fchiave/github-classroom/comp426-2022-spring/a05-fchiave/node_modules/express/lib/router/layer.js:95:5)</pre>
+</body>
+</html>
 ```
 
 #### Response headers
 
 ```
-
+HTTP/1.1 500 Internal Server Error
+X-Powered-By: Express
+Access-Control-Allow-Origin: *
+Content-Security-Policy: default-src 'none'
+X-Content-Type-Options: nosniff
+Content-Type: text/html; charset=utf-8
+Content-Length: 1554
+Date: Tue, 26 Apr 2022 22:11:30 GMT
+Connection: keep-alive
+Keep-Alive: timeout=5
 ```
 
