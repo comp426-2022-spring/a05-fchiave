@@ -67,7 +67,7 @@ Keep-Alive: timeout=5
 
 ### /app/flip/ (GET)
  * Will flip a coin and log flip result in terminal
- 
+
 #### Request cURL
 
 ```
@@ -94,7 +94,7 @@ Keep-Alive: timeout=5
 ```
 
 ### /app/flips/:number/ (GET)
-
+ * Deprecated as it interfered with post and json objects, see /app/flips/ (POST)
 #### Request cURL
 
 ```
@@ -113,6 +113,33 @@ Keep-Alive: timeout=5
 
 ```
 
+### /app/flips/ (POST)
+ * Flips amount of coins specified in form on multi div, returns results of flips
+#### Request cURL
+
+```
+curl http://localhost:5000/app/flips/
+```
+
+#### Response body
+
+```
+raw: (33) ['"tails"', '"heads"', '"heads"', '"heads"', '"heads"', '"heads"', '"heads"', '"heads"', '"heads"', '"heads"', '"heads"', '"tails"', '"tails"', '"tails"', '"heads"', '"heads"', '"tails"', '"tails"', '"tails"', '"heads"', '"heads"', '"heads"', '"heads"', '"tails"', '"tails"', '"tails"', '"heads"', '"tails"', '"tails"', '"heads"', '"tails"', '"tails"', '"tails"']
+summary: {tails: 15, heads: 18}
+[[Prototype]]: Object
+```
+
+#### Response headers
+
+```
+HTTP/1.1 200 OK
+X-Powered-By: Express
+Access-Control-Allow-Origin: *
+Content-Type: text/plain
+Date: Tue, 26 Apr 2022 21:46:21 GMT
+Connection: keep-alive
+Keep-Alive: timeout=5
+```
 ### /app/flip/coin/ (GET)
 
 #### Request cURL

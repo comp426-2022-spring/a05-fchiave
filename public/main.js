@@ -74,7 +74,7 @@ async function flipCoins(event) {
     try {
         const formData = new FormData(formEvent);
         const flips = await sendFlips({ url, formData });
-
+        console.log(flips)
         document.getElementById("heads").innerHTML = "Heads (Blue): "+flips.summary.heads;
         document.getElementById("tails").innerHTML = "Tails (Red): "+flips.summary.tails;
         let piChart = document.getElementById("pi")
