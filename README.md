@@ -1,17 +1,3 @@
-[![Open in Visual Studio Code](https://classroom.github.com/assets/open-in-vscode-c66648af7eb3fe8bc4f294546bfd86ef473780cde1dea487d3c4ff354943c9ae.svg)](https://classroom.github.com/online_ide?assignment_repo_id=7670834&assignment_repo_type=AssignmentRepo)
-# a05 Human Interface
-
-In this assignment, you will build an HTML human interface for your API. You will also document your API endpoints and consider package structure.
-
-## DO NOT CLONE THIS REPOSITORY DIRECTLY
-
-Use the GitHub classroom link instead: https://classroom.github.com/a/PUVGxeMe
-
-If you clone this repo directly, it will not be added to the organization as an individual repo associated with your account and you will not be able to push to it.
-
-## Instructions
-
-Full instructions for this assignment are available at: https://comp426.johndmart.in/a/05/
 
 <!-- DELETE EVERYTHING ABOVE THIS LINE -->
 
@@ -80,87 +66,77 @@ Keep-Alive: timeout=5
 ```
 
 ### /app/flip/ (GET)
+ * Will flip a coin and log flip result in terminal
 
 #### Request cURL
 
 ```
+curl http://localhost:5000/app/flip/
 
 ```
 
 #### Response body
 
 ```
-
+{flip: 'heads'}
 ```
 
 #### Response headers
 
 ```
-
+HTTP/1.1 200 OK
+X-Powered-By: Express
+Access-Control-Allow-Origin: *
+Content-Type: text/plain
+Date: Tue, 26 Apr 2022 21:37:51 GMT
+Connection: keep-alive
+Keep-Alive: timeout=5
 ```
 
 ### /app/flips/:number/ (GET)
+ * Deprecated as endpoint interfered with post and json objects, see /app/flips/ (POST)
 
+
+### /app/flips/ (POST)
+ * Flips amount of coins specified in form on multi div, returns:
+  * raw - results of flips 
+  * summary - condensed summary of flips
 #### Request cURL
 
 ```
-
+curl -X POST -H 'Content-Type: application/json' -d '{"number":"3"}' http://localhost:5000/app/flips/
 ```
 
 #### Response body
 
 ```
-
+raw: (3) ['"heads"', '"tails"', '"heads"']
+summary: {tails: 1, heads: 2}
 ```
 
 #### Response headers
 
 ```
-
+HTTP/1.1 200 OK
+X-Powered-By: Express
+Access-Control-Allow-Origin: *
+Content-Type: text/plain
+Date: Tue, 26 Apr 2022 21:46:21 GMT
+Connection: keep-alive
+Keep-Alive: timeout=5
 ```
 
-### /app/flip/coin/ (GET)
-
-#### Request cURL
-
-```
-
-```
-
-#### Response body
-
-```
-
-```
-
-#### Response headers
-
-```
-
-```
 
 ### /app/flip/call/:guess/ (GET)
+ * Deprecated as endpoint interfered with post and json objects, see /app/flip/call/ (POST)
 
-#### Request cURL
-
-```
-
-```
-
-#### Response body
-
-```
-
-```
-
-#### Response headers
-
-```
-
-```
 
 ### /app/flip/call/ (POST)
-
+ * Sends guess of coin flip to server
+ * Returns:
+    * "call" - initial guess
+    * "flip" - actual coin flip result
+    * "result" - win or loss dependent on call and flip matching
 #### Request cURL
 
 ```
@@ -187,7 +163,9 @@ Keep-Alive: timeout=5
 ```
 
 ### /app/flip/coins/ (POST)
-
+* Flips provided number of coins and return results in two arrays
+* Returns "raw" that lists all flips
+* Returns "summary" that condenses all flips into numerical values of each flip
 #### Request cURL
 
 ```
@@ -218,147 +196,65 @@ Keep-Alive: timeout=5
 #### Request cURL
 
 ```
-
+curl http://localhost:5000/app/log/access/
 ```
 
 #### Response body
 
 ```
-
+[{"id":1,"remoteaddr":"::ffff:127.0.0.1","remoteuser":null,"time":"1651010647229.0","method":"GET","url":"/app/log/access/","protocol":"http","httpversion":"1.1","secure":null,"status":"200.0","referer":null,"useragent":"curl/7.74.0"}]
 ```
 
 #### Response headers
 
 ```
-
-```
-
-### /app/log/access/ (GET)
-
-#### Request cURL
-
-```
-
-```
-
-#### Response body
-
-```
-
-```
-
-#### Response headers
-
-```
-
+HTTP/1.1 200 OK
+X-Powered-By: Express
+Access-Control-Allow-Origin: *
+Content-Type: application/json; charset=utf-8
+Content-Length: 470
+ETag: W/"1d6-AmoJP5Gqo70rzp2AO07L3cQspzo"
+Date: Tue, 26 Apr 2022 22:04:52 GMT
+Connection: keep-alive
+Keep-Alive: timeout=5
 ```
 
 ### /app/log/error/ (GET)
-
-_Not yet implemented_
+ * Returns an error log of server
 
 #### Request cURL
 
 ```
-
+curl http://localhost:5000/app/log/error
 ```
 
 #### Response body
 
 ```
-
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Error</title>
+</head>
+<body>
+<pre>Error: Error test successful.<br> &nbsp; &nbsp;at /home/fchiave/github-classroom/comp426-2022-spring/a05-fchiave/index.js:86:15<br> &nbsp; &nbsp;at Layer.handle [as handle_request] (/home/fchiave/github-classroom/comp426-2022-spring/a05-fchiave/node_modules/express/lib/router/layer.js:95:5)<br> &nbsp; &nbsp;at next (/home/fchiave/github-classroom/comp426-2022-spring/a05-fchiave/node_modules/express/lib/router/route.js:137:13)<br> &nbsp; &nbsp;at Route.dispatch (/home/fchiave/github-classroom/comp426-2022-spring/a05-fchiave/node_modules/express/lib/router/route.js:112:3)<br> &nbsp; &nbsp;at Layer.handle [as handle_request] (/home/fchiave/github-classroom/comp426-2022-spring/a05-fchiave/node_modules/express/lib/router/layer.js:95:5)<br> &nbsp; &nbsp;at /home/fchiave/github-classroom/comp426-2022-spring/a05-fchiave/node_modules/express/lib/router/index.js:281:22<br> &nbsp; &nbsp;at Function.process_params (/home/fchiave/github-classroom/comp426-2022-spring/a05-fchiave/node_modules/express/lib/router/index.js:341:12)<br> &nbsp; &nbsp;at next (/home/fchiave/github-classroom/comp426-2022-spring/a05-fchiave/node_modules/express/lib/router/index.js:275:10)<br> &nbsp; &nbsp;at /home/fchiave/github-classroom/comp426-2022-spring/a05-fchiave/index.js:75:5<br> &nbsp; &nbsp;at Layer.handle [as handle_request] (/home/fchiave/github-classroom/comp426-2022-spring/a05-fchiave/node_modules/express/lib/router/layer.js:95:5)</pre>
+</body>
+</html>
 ```
 
 #### Response headers
 
 ```
-
+HTTP/1.1 500 Internal Server Error
+X-Powered-By: Express
+Access-Control-Allow-Origin: *
+Content-Security-Policy: default-src 'none'
+X-Content-Type-Options: nosniff
+Content-Type: text/html; charset=utf-8
+Content-Length: 1554
+Date: Tue, 26 Apr 2022 22:11:30 GMT
+Connection: keep-alive
+Keep-Alive: timeout=5
 ```
 
-### /app/user/login/ (POST)
-
-_Not yet implemented_
-
-#### Request cURL
-
-```
-
-```
-
-#### Response body
-
-```
-
-```
-
-#### Response headers
-
-```
-
-```
-
-### /app/user/new/ (POST)
-
-_Not yet implemented_
-
-#### Request cURL
-
-```
-
-```
-
-#### Response body
-
-```
-
-```
-
-#### Response headers
-
-```
-
-```
-
-### /app/user/update/ (PATCH)
-
-_Not yet implemented_
-
-#### Request cURL
-
-```
-
-```
-
-#### Response body
-
-```
-
-```
-
-#### Response headers
-
-```
-
-```
-
-### /app/user/delete/ (DELETE)
-
-_Not yet implemented_
-
-#### Request cURL
-
-```
-
-```
-
-#### Response body
-
-```
-
-```
-
-#### Response headers
-
-```
-
-```
